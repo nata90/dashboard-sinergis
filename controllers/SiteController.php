@@ -72,12 +72,11 @@ class SiteController extends Controller
         $arrTanggal =[];
         $arrX = [];
  
+        //ambil data 7 hari terakhir
         for($i=1;$i<=7;$i++){
             $arrTanggal[] = date('Y-m-d', strtotime('+'.$i.' days', strtotime($sevenDaysAgo)));
             $arrX[] = date('d', strtotime('+'.$i.' days', strtotime($sevenDaysAgo)));
         }
-
-        
 
         //get data kunjungan rawat jalan
         $arrJkn = [];
