@@ -109,37 +109,43 @@ class SiteController extends Controller
         ];
 
         //get data kunjungan rawat inap
+
+        $arrDataKelas1 = array();
+        $arrDataKelas2 = array();
+        $arrDataKelas3 = array();
+        $arrDataVip = array();
+
         $returnDataRi = [];
         foreach($arrTanggal as $row){
-             $responseRi = $curl->get('http://192.168.0.90/rsstnet/index.php?r=integrasi/index&pelayanan=irj&tanggal='.$row);
-             $arDataRi = json_decode($responseRi);
+            $responseRi = $curl->get('http://192.168.0.90/rsstnet/index.php?r=integrasi/index&pelayanan=iri&tanggal='.$row);
+            $arDataRi = json_decode($responseRi);
 
+           foreach($arDataRi as $values){
+                $toArray = (array)$values;
 
+                if(strtoupper(trim($toArray['CONTENT'])) == 'KELAS I'){
+                    array_push($arrDataKelas1, (int)$toArray['JLH']);
+                    $returnDataRi[strtoupper(trim($toArray['CONTENT']))] = ['name'=>$toArray['CONTENT'], 'data'=> $arrDataKelas1];
+                }elseif(strtoupper(trim($toArray['CONTENT'])) == 'KELAS II'){
+                    array_push($arrDataKelas2, (int)$toArray['JLH']);
+                    $returnDataRi[strtoupper(trim($toArray['CONTENT']))] = ['name'=>$toArray['CONTENT'], 'data'=> $arrDataKelas2];
+                }elseif(strtoupper(trim($toArray['CONTENT'])) == 'KELAS III'){
+                    array_push($arrDataKelas3, (int)$toArray['JLH']);
+                    $returnDataRi[strtoupper(trim($toArray['CONTENT']))] = ['name'=>$toArray['CONTENT'], 'data'=> $arrDataKelas3];
+                }elseif(strtoupper(trim($toArray['CONTENT'])) == 'VIP A'){
+                    array_push($arrDataVip, (int)$toArray['JLH']);
+                    $returnDataRi[strtoupper(trim($toArray['CONTENT']))] = ['name'=>$toArray['CONTENT'], 'data'=> $arrDataVip];
+                }
+           }
         }
 
-
-        /*[[
-                            'name'=> 'Tokyo',
-                            'data'=> [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6]
-
-                        ], [
-                            'name'=> 'New York',
-                            'data'=> [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0]
-
-                        ], [
-                            'name'=> 'London',
-                            'data'=> [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0]
-
-                        ], [
-                            'name'=> 'Berlin',
-                            'data'=> [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4]
-
-                        ]]*/
+        $returnRi = array_values($returnDataRi);
        
         return $this->render('index',[
             'returnData'=>$returnData,
             'arrTanggal'=>$arrTanggal,
-            'arrX'=>$arrX
+            'arrX'=>$arrX,
+            'returnRi'=>$returnRi
         ]);
     }
 
@@ -150,6 +156,12 @@ class SiteController extends Controller
 
         $arrTanggal =[];
         $returnDataRi = [];
+        $dateNow = date('Y-m-d');
+
+        $arrDataKelas1 = array();
+        $arrDataKelas2 = array();
+        $arrDataKelas3 = array();
+        $arrDataVip = array();
 
         $sevenDaysAgo = date('Y-m-d', strtotime('-7 days', strtotime($dateNow)));
 
@@ -161,17 +173,33 @@ class SiteController extends Controller
             $responseRi = $curl->get('http://192.168.0.90/rsstnet/index.php?r=integrasi/index&pelayanan=iri&tanggal='.$val);
             $arDataRi = json_decode($responseRi);
 
-            foreach($arDataRi as $row){
+           foreach($arDataRi as $row){
                 $toArray = (array)$row;
-                //$returnDataRi[] = ['name'=>$toArray['CONTENT'], 'data'=> [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6]];
-                $returnDataRi = $row;
-            }
+
+                if(strtoupper(trim($toArray['CONTENT'])) == 'KELAS I'){
+                    array_push($arrDataKelas1, $toArray['JLH']);
+                    $returnDataRi[strtoupper(trim($toArray['CONTENT']))] = ['name'=>$toArray['CONTENT'], 'data'=> $arrDataKelas1];
+                }elseif(strtoupper(trim($toArray['CONTENT'])) == 'KELAS II'){
+                    array_push($arrDataKelas2, $toArray['JLH']);
+                    $returnDataRi[strtoupper(trim($toArray['CONTENT']))] = ['name'=>$toArray['CONTENT'], 'data'=> $arrDataKelas2];
+                }elseif(strtoupper(trim($toArray['CONTENT'])) == 'KELAS III'){
+                    array_push($arrDataKelas3, $toArray['JLH']);
+                    $returnDataRi[strtoupper(trim($toArray['CONTENT']))] = ['name'=>$toArray['CONTENT'], 'data'=> $arrDataKelas3];
+                }elseif(strtoupper(trim($toArray['CONTENT'])) == 'VIP A'){
+                    array_push($arrDataVip, $toArray['JLH']);
+                    $returnDataRi[strtoupper(trim($toArray['CONTENT']))] = ['name'=>$toArray['CONTENT'], 'data'=> $arrDataVip];
+                }
+
+                
+
+           }
 
             
         }
 
+        $return = array_values($returnDataRi);
         echo '<pre>';
-        print_r($returnDataRi);
+        print_r($return);
         echo '</pre>';
     }
 
