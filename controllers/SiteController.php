@@ -140,12 +140,17 @@ class SiteController extends Controller
         }
 
         $returnRi = array_values($returnDataRi);
+
+        //get data pendaftaran poli
+        $responsePoli = $curl->get('http://192.168.0.90/rsstnet/index.php?r=integrasi/getdatapoli');
+        $arDataPoli = json_decode($responsePoli);
        
         return $this->render('index',[
             'returnData'=>$returnData,
             'arrTanggal'=>$arrTanggal,
             'arrX'=>$arrX,
-            'returnRi'=>$returnRi
+            'returnRi'=>$returnRi,
+            'arDataPoli'=>$arDataPoli
         ]);
     }
 
