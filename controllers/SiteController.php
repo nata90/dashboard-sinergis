@@ -75,7 +75,7 @@ class SiteController extends Controller
         //ambil data 7 hari terakhir
         for($i=1;$i<=7;$i++){
             $arrTanggal[] = date('Y-m-d', strtotime('+'.$i.' days', strtotime($sevenDaysAgo)));
-            $arrX[] = date('d', strtotime('+'.$i.' days', strtotime($sevenDaysAgo)));
+            $arrX[] = date('d F', strtotime('+'.$i.' days', strtotime($sevenDaysAgo)));
         }
 
         //get data kunjungan rawat jalan
@@ -144,13 +144,26 @@ class SiteController extends Controller
         //get data pendaftaran poli
         $responsePoli = $curl->get('http://192.168.0.90/rsstnet/index.php?r=integrasi/getdatapoli');
         $arDataPoli = json_decode($responsePoli);
+
+        //get data pendapatan tunai
+        $arrDataTunai = array();
+        foreach($arrTanggal as $value){
+
+            $responseTunai = $curl->get('http://192.168.0.90/rsstnet/index.php?r=integrasi/getpendapatantunai&tanggal='.$value);
+            $arTunai = json_decode($responseTunai);
+
+            $toArray = (array)$arTunai;
+
+            $arrDataTunai[] = $toArray['total'];
+        }
        
         return $this->render('index',[
             'returnData'=>$returnData,
             'arrTanggal'=>$arrTanggal,
             'arrX'=>$arrX,
             'returnRi'=>$returnRi,
-            'arDataPoli'=>$arDataPoli
+            'arDataPoli'=>$arDataPoli,
+            'arrDataTunai'=>$arrDataTunai
         ]);
     }
 

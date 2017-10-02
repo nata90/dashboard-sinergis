@@ -19,7 +19,7 @@ $this->title = 'DASHBOARD SINERGIS';
                         ]
                     ],
                     'title'=> [
-                        'text'=> 'Jumlah Kunjungan Rawat Jalan'
+                        'text'=> 'JUMLAH KUNJUNGAN RAWAT JALAN'
                     ],
                     'subtitle'=> [
                         'text'=> date('d F Y')
@@ -42,16 +42,12 @@ $this->title = 'DASHBOARD SINERGIS';
     <div class="body-content">
 
         <div class="row">
-            
-
-
             <div class="col-lg-6">
-                <h2>Trend Kunjungan Rawat Jalan</h2>
 
                <?php 
                 echo Highcharts::widget([
                    'options' => [
-                      'title' => ['text' => date('F')],
+                      'title' => ['text' => 'TREND KUNJUNGAN RAWAT JALAN '.date('F')],
                       'xAxis' => [
                          'categories' => $arrX
                       ],
@@ -63,9 +59,7 @@ $this->title = 'DASHBOARD SINERGIS';
                 ]);
                 ?>
             </div>
-            
             <div class="col-lg-6">
-                <h2>Trend Kunjungan Rawat Inap</h2>
 
                 <?php 
                 echo Highcharts::widget([
@@ -73,7 +67,7 @@ $this->title = 'DASHBOARD SINERGIS';
                         'chart'=> [
                             'type'=> 'column'
                         ],
-                        'title' => ['text' => date('F')],
+                        'title' => ['text' => 'TREND KUNJUNGAN RAWAT INAP '.date('F')],
                         //'subtitle' => ['text' => 'Source: WorldClimate.com'],
                         'xAxis' => [
                             'categories' => $arrX,
@@ -104,8 +98,42 @@ $this->title = 'DASHBOARD SINERGIS';
                 ?>
             </div>
 
-            
+            <div class="col-lg-6">
+
+                <?php 
+                echo Highcharts::widget([
+                   'options' => [
+                        
+                        'title'=> [
+                            'text'=> 'Pendapatan Tunai '.date('F')
+                        ],                        
+                        'xAxis'=> [
+                            'categories'=> $arrX,
+                            'title' => ['text' => 'Tanggal']
+                        ],
+                        'yAxis' => [
+                             'title' => ['text' => 'Rupiah']
+                          ],
+                        'tooltip'=> [
+                            'pointFormat'=>'{point.y:.0f} rupiah',
+                            'shared'=> true,
+                            'useHTML'=> true,
+                            
+                        ],
+                        'series'=> [[
+                            'type'=> 'column',
+                            'colorByPoint'=> 'true',
+                            'data'=> $arrDataTunai,
+                            'showInLegend'=> false
+                        ]]
+                   ]
+                ]);
+                ?>
+            </div>
         </div>
 
+
+
     </div>
+    
 </div>
