@@ -98,7 +98,7 @@ $this->title = 'DASHBOARD SINERGIS';
                 ?>
             </div>
 
-            <div class="col-lg-6">
+           <div class="jumbotron">
 
                 <?php 
                 echo Highcharts::widget([
@@ -130,10 +130,9 @@ $this->title = 'DASHBOARD SINERGIS';
                 ]);
                 ?>
             </div>
-            <div class="col-lg-6">
 
                 <?php 
-                echo Highcharts::widget([
+                /*echo Highcharts::widget([
                    'options' => [
                         'chart'=> [
                             'type'=> 'column'
@@ -165,9 +164,8 @@ $this->title = 'DASHBOARD SINERGIS';
                         ],
                         'series'=> $returnRi
                    ]
-                ]);
+                ]);*/
                 ?>
-            </div>
         </div>
 
 

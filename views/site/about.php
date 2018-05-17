@@ -23,11 +23,11 @@ $this->params['breadcrumbs'][] = $this->title;
 		        </tr>
 		        <tr>
 			        <td>Kelas RS</td>
-			        <td>Kelas B</td>
+			        <td>Kelas A</td>
 		        </tr>
 		        <tr>
 			        <td>Direktur RS</td>
-			        <td>dr. Alida Lienawati, MKes.,MMR</td>
+			        <td>dr. Endang Widyaswati, M.Kes</td>
 		        </tr>
 		        <tr>
 			        <td>Alamat</td>
