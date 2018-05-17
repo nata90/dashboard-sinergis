@@ -141,6 +141,11 @@ class SiteController extends Controller
 
         $returnRi = array_values($returnDataRi);
 
+        /*echo '<pre>';
+        print_r($returnRi);
+        echo '</pre>';
+        exit();*/
+
         //get data pendaftaran poli
         $responsePoli = $curl->get('http://192.168.0.90/rsstnet/index.php?r=integrasi/getdatapoli');
         $arDataPoli = json_decode($responsePoli);

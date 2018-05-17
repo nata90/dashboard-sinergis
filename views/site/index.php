@@ -42,12 +42,12 @@ $this->title = 'DASHBOARD SINERGIS';
     <div class="body-content">
 
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-6" style="padding-bottom:20px;">
 
                <?php 
                 echo Highcharts::widget([
                    'options' => [
-                      'title' => ['text' => 'TREND KUNJUNGAN RAWAT JALAN '.date('F')],
+                      'title' => ['text' => 'Trend Kunjungan Rawat Jalan '.date('F')],
                       'xAxis' => [
                          'categories' => $arrX
                       ],
@@ -59,7 +59,7 @@ $this->title = 'DASHBOARD SINERGIS';
                 ]);
                 ?>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-6" style="padding-bottom:20px;">
 
                 <?php 
                 echo Highcharts::widget([
@@ -67,7 +67,7 @@ $this->title = 'DASHBOARD SINERGIS';
                         'chart'=> [
                             'type'=> 'column'
                         ],
-                        'title' => ['text' => 'TREND KUNJUNGAN RAWAT INAP '.date('F')],
+                        'title' => ['text' => 'Trend Kunjungan Rawat Inap '.date('F')],
                         //'subtitle' => ['text' => 'Source: WorldClimate.com'],
                         'xAxis' => [
                             'categories' => $arrX,
@@ -126,6 +126,44 @@ $this->title = 'DASHBOARD SINERGIS';
                             'data'=> $arrDataTunai,
                             'showInLegend'=> false
                         ]]
+                   ]
+                ]);
+                ?>
+            </div>
+            <div class="col-lg-6">
+
+                <?php 
+                echo Highcharts::widget([
+                   'options' => [
+                        'chart'=> [
+                            'type'=> 'column'
+                        ],
+                        'title' => ['text' => 'Pendapapatan Per Tanggungan '.date('F')],
+                        //'subtitle' => ['text' => 'Source: WorldClimate.com'],
+                        'xAxis' => [
+                            'categories' => $arrX,
+                            'crosshair' => true,
+                        ],
+                        'yAxis'=> [
+                            'min'=> 0,
+                            'title'=> [
+                                'text'=> 'Total pasien'
+                            ]
+                        ],
+                        'tooltip'=> [
+                            'headerFormat'=> '<span style="font-size:10px">{point.key}</span><table>',
+                            'pointFormat'=>'<tr><td style="color:{series.color};padding:0">{series.name}: </td><td style="padding:0"><b>{point.y:.1f} pasien</b></td></tr>',
+                            'footerFormat'=> '</table>',
+                            'shared'=> true,
+                            'useHTML'=> true
+                        ],
+                        'plotOptions'=> [
+                            'column'=> [
+                                'pointPadding'=> 0.2,
+                                'borderWidth'=> 0
+                            ]
+                        ],
+                        'series'=> $returnRi
                    ]
                 ]);
                 ?>
