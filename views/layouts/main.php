@@ -39,6 +39,7 @@ AppAsset::register($this);
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'Profil', 'url' => ['/site/about']],
+            ['label' => 'Info Tempat Tidur', 'url' => 'http://192.168.0.123/sinergis/index.php/site/tempattidur4'],
             //['label' => 'Contact', 'url' => ['/site/contact']],
             /*Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
