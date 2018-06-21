@@ -27,7 +27,14 @@ $this->title = 'DASHBOARD SINERGIS';
                     'plotOptions'=> [
                         'pie'=> [
                             'innerSize'=> 100,
-                            'depth'=> 45
+                            'depth'=> 45,
+                            'dataLabels' => [
+                                'enabled' => true,
+                                    'format' => '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                    'style' => [
+                                        'color'=> '(Highcharts.theme && Highcharts.theme.contrastTextColor)' || 'black'
+                                    ]
+                            ],
                         ]
                     ],
                     'series'=> [[
@@ -52,9 +59,17 @@ $this->title = 'DASHBOARD SINERGIS';
                          'categories' => $arrX
                       ],
                       'yAxis' => [
-                         'title' => ['text' => 'Total Pengunjung']
+                         'title' => ['text' => 'Total Pengunjung'],
+                         'max' > 250,
                       ],
-                      'series' => $returnData
+                      'series' => $returnData,
+                      'plotOptions'=> [
+                            'line'=> [
+                                'dataLabels' => [
+                                    'enabled' => true,
+                                ],
+                            ]
+                        ],
                    ]
                 ]);
                 ?>
@@ -89,8 +104,11 @@ $this->title = 'DASHBOARD SINERGIS';
                         'plotOptions'=> [
                             'column'=> [
                                 'pointPadding'=> 0.2,
-                                'borderWidth'=> 0
-                            ]
+                                'borderWidth'=> 0,
+                                'dataLabels' => [
+                                    'enabled' => true,
+                                ],
+                            ],
                         ],
                         'series'=> $returnRi
                    ]
@@ -125,7 +143,14 @@ $this->title = 'DASHBOARD SINERGIS';
                             'colorByPoint'=> 'true',
                             'data'=> $arrDataTunai,
                             'showInLegend'=> false
-                        ]]
+                        ]],
+                        'plotOptions'=> [
+                            'column'=> [
+                                'dataLabels' => [
+                                    'enabled' => true,
+                                ],
+                            ],
+                        ],
                    ]
                 ]);
                 ?>

@@ -82,6 +82,7 @@ class SiteController extends Controller
         //get data kunjungan rawat jalan
         $arrJkn = [];
         $arrNonJkn = [];
+        $arrTotalAll = [];
 
         $returnData = [];
         foreach($arrTanggal as $val){
@@ -99,14 +100,17 @@ class SiteController extends Controller
                 $totalNonJkn += $toArray['NON JKN'];
 
             }
+            $totalSemua = $totalJkn + $totalNonJkn;
 
             array_push($arrJkn, $totalJkn);
             array_push($arrNonJkn, $totalNonJkn);
+            array_push($arrTotalAll, $totalSemua);
         }
         
         $returnData = [
             ['name'=>'JKN', 'data'=>$arrJkn],
-            ['name'=>'NON JKN', 'data'=>$arrNonJkn]
+            ['name'=>'NON JKN', 'data'=>$arrNonJkn],
+            ['name'=>'TOTAL', 'data'=>$arrTotalAll],
         ];
 
         //get data kunjungan rawat inap
