@@ -166,6 +166,7 @@ class SiteController extends Controller
 
             $arrDataTunai[] = $toArray['total'];
         }
+
        
         return $this->render('index',[
             'returnData'=>$returnData,
@@ -289,5 +290,11 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+
+    public function actionIndikator()
+    {
+        return $this->render('indikator');
     }
 }
