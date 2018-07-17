@@ -11,7 +11,7 @@ $this->title = 'DASHBOARD SINERGIS';
     <div class="body-content">
 
         <div class="row">
-            <div class="col-lg-6" style="padding-bottom:20px;">
+             <div class="jumbotron">
                 <?php 
                 echo Highcharts::widget([
                     'options' => [
@@ -21,11 +21,11 @@ $this->title = 'DASHBOARD SINERGIS';
                         'title'=> [
                             'text'=> 'INDIKATOR KINERJA TERPILIH (BULAN INI)'
                         ],
-                        'subtitle'=> [
+                        /*'subtitle'=> [
                             'text'=> 'Source: <a href="https://en.wikipedia.org/wiki/World_population">Wikipedia.org</a>',
-                        ],
+                        ],*/
                         'xAxis'=> [
-                            'categories'=> ['Kelengkapan dan ketepatan rekam medis dalam waktu 24 jam', 'Ketepatan jam visite dokter spesialis', 'Sistem antrian online rawat jalan (online/sms)', 'Informasi ketersediaan tempat tidur'],
+                            'categories'=> $arrData,
                             'title'=> [
                                 'text'=> null
                             ]
@@ -33,7 +33,7 @@ $this->title = 'DASHBOARD SINERGIS';
                         'yAxis'=> [
                             'min'=> 0,
                             'title'=> [
-                                'text'=> 'Population (millions)',
+                                'text'=> 'Persen',
                                 'align'=> 'high'
                             ],
                             'labels'=> [
@@ -41,7 +41,7 @@ $this->title = 'DASHBOARD SINERGIS';
                             ]
                         ],
                         'tooltip'=> [
-                            'valueSuffix'=> ' millions'
+                            'valueSuffix'=> ' persen'
                         ],
                         'plotOptions'=> [
                             'bar'=> [
@@ -54,20 +54,20 @@ $this->title = 'DASHBOARD SINERGIS';
                             'enabled'=> false
                         ],
                         'series'=> [[
-                            //'name'=> 'Year 1800',
-                            'data'=> [107, 31, 635, 203]
+                            'name'=> 'Persen',
+                            'data'=> $arrData2
                         ]]
                    ]
                 ]);
                  ?>
             </div>
-            <div class="col-lg-6" style="padding-bottom:20px;">
+            <div class="jumbotron">
                 <?php 
                 echo Highcharts::widget([
                     'options' => [
-                        /*'chart'=> [
-                            'type'=> 'bar',
-                        ],*/
+                        'chart'=> [
+                            'type'=> 'column',
+                        ],
                         'title'=> [
                             'text'=> 'PENYERAPAN ANGGARAN (BULANAN)'
                         ],

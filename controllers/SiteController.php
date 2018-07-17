@@ -295,6 +295,19 @@ class SiteController extends Controller
 
     public function actionIndikator()
     {
-        return $this->render('indikator');
+        $curl = new curl\Curl();
+
+        $response = $curl->get('http://192.168.0.90/rsstnet/index.php?r=indikator/indikatorikt');
+
+        $arrData = json_decode($response);
+
+        $response2 = $curl->get('http://192.168.0.90/rsstnet/index.php?r=indikator/dataindikator');
+
+        $arrData2 = json_decode($response2);
+
+        return $this->render('indikator', array(
+            'arrData'=>$arrData,
+            'arrData2'=>$arrData2
+        ));
     }
 }
